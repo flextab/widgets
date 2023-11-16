@@ -1,0 +1,13 @@
+{
+    "title": "日历",
+    "description": "日历，可查看公历/农历/黄历/二十四节气等。",
+    "mainView": "index.vue",
+    "feature": "card",
+    "version": 1,
+    "manifestVersion": "1",
+    "type": "vue3-sfc",
+    "size": {
+        "width": 1,
+        "height": 1
+    }
+}

@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FlexTab 一个浏览器标签页",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "number",
+            "description": "Widget 版本号，由开发者自己设置，但每次发布必须比前一次版本号高"
+        },
+        "manifestVersion": {
+            "type": "string",
+            "description": "Widget JSON配置版本号，目前固定为1",
+            "title": "WidgetManifestVersion",
+            "enum": ["1"],
+            "tsEnumNames": ["Version1"]
+        },
+        "type": {
+            "type": "string",
+            "description": "插件代码类型，目前支持类型为 vue3-sfc(vue3单文件组件) script(js模块组件)",
+            "enum": ["vue3-sfc", "script"],
+            "tsEnumNames": ["Vue3SFC", "Script"],
+            "title": "WidgetCodeType"
+        },
+        "title": {
+            "type": "string",
+            "description": "插件名称，给插件起一个令人难忘的名字吧。"
+        },
+        "description": {
+            "type": "string",
+            "description": "插件描述，在此可以详细地介绍插件内容。"
+        },
+        "feature": {
+            "type": "string",
+            "description": "插件用途，card表示插件用于信息卡片在用户网格桌面中展示，background表示插件用于页面背景图展示，search表示搜索插件。",
+            "enum": ["card", "background", "search"],
+            "tsEnumNames": ["Card", "Background", "Search"],
+            "title": "WidgetFeature"
+        },
+        "mainView": {
+            "type": "string",
+            "description": "插件主渲染入口"
+        },
+        "detailView": {
+            "type": "string",
+            "description": "插件详情入口"
+        },
+        "editView": {
+            "type": "string",
+            "description": "插件编辑页面入口"
+        },
+        "size": {
+            "type": "object",
+            "description": "插件占据网格尺寸",
+            "properties": {
+                "width": {
+                    "description": "网格宽度",
+                    "type": "number"
+                },
+                "height": {
+                    "description": "网格高度",
+                    "type": "number"
+                }
+            }
+        }
+    },
+    "required": ["version", "manifestVersion", "type", "title", "feature", "mainView"],
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "feature": {
+                        "const": "card"
+                    }
+                }
+            },
+            "then": {
+                "required": ["size"]
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "feature": {
+                        "const": "background"
+                    }
+                }
+            },
+            "then": true
+        },
+        {
+            "if": {
+                "properties": {
+                    "feature": {
+                        "const": "search"
+                    }
+                }
+            },
+            "then": true
+        }
+    ]
+}

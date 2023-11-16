@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": true,
+    "prettier.tabWidth": 4,
+    "prettier.ignorePath": ".prettierignore",
+    "json.schemas": [
+        {
+            "url": "/.vscode/schema.json",
+            "fileMatch": ["/**/widget.json", "!/.vscode", "!node_modules"]
+        }
+    ]
+}
