@@ -1,19 +1,13 @@
 {
-  "name": "flex-tab-widget-demo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@codeup.aliyun.com:ikrong/private/flex-tab-widget-demo.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "vue": "^3.3.8"
-  }
+    "name": "flex-tab-widget-demo",
+    "version": "1.0.0",
+    "description": "flextab widget demo",
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "fast-glob": "^3.3.2",
+        "jszip": "^3.10.1"
+    }
 }

@@ -8,6 +8,7 @@
         "skipLibCheck": true,
         "paths": {
             "*": ["./.vscode/typings/*/index.d.ts"]
-        }
+        },
+        "lib": ["DOM", "ESNext"]
     }
 }
