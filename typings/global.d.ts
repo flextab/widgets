@@ -113,7 +113,7 @@ declare type SVGIcons =
     | "warning-fill"
     | "warning";
 
-interface window {
+interface Window {
     corsFetch: {
         (url: RequestInfo | URL, init?: RequestInit): Promise<Response>;
         XCORS_REQUEST_HEADERS: string;
