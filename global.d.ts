@@ -1,3 +1,3 @@
-/// <reference path=".vscode/typings/vue/index.d.ts" />
-/// <reference path=".vscode/typings/dayjs/index.d.ts" />
-/// <reference path=".vscode/typings/global.d.ts" />
+/// <reference path="./typings/vue/index.d.ts" />
+/// <reference path="./typings/dayjs/index.d.ts" />
+/// <reference path="./typings/global.d.ts" />

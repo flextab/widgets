@@ -2,7 +2,9 @@
     "name": "flex-tab-widget-demo",
     "version": "1.0.0",
     "description": "flextab widget demo",
-    "scripts": {},
+    "scripts": {
+        "build": "node build.mjs"
+    },
     "keywords": [],
     "author": "",
     "license": "MIT",

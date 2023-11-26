@@ -16,9 +16,9 @@
         },
         "type": {
             "type": "string",
-            "description": "插件代码类型，目前支持类型为 vue3-sfc(vue3单文件组件) script(js模块组件)",
-            "enum": ["vue3-sfc", "script"],
-            "tsEnumNames": ["Vue3SFC", "Script"],
+            "description": "插件代码类型，目前支持类型为 vue3-sfc(vue3单文件组件)",
+            "enum": ["vue3-sfc"],
+            "tsEnumNames": ["Vue3SFC"],
             "title": "WidgetCodeType"
         },
         "title": {
@@ -51,6 +51,7 @@
         "size": {
             "type": "object",
             "description": "插件占据网格尺寸",
+            "required": ["width", "height"],
             "properties": {
                 "width": {
                     "description": "网格宽度",
@@ -59,6 +60,28 @@
                 "height": {
                     "description": "网格高度",
                     "type": "number"
+                },
+                "supports": {
+                    "description": "支持的网格尺寸",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["width", "height"],
+                        "properties": {
+                            "width": {
+                                "description": "网格宽度",
+                                "type": "number"
+                            },
+                            "height": {
+                                "description": "网格高度",
+                                "type": "number"
+                            },
+                            "label": {
+                                "description": "描述",
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
             }
         }

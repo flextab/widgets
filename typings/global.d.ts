@@ -16,30 +16,61 @@ declare module "virtual:flextab-widgets:list" {
 
 /**会同步至服务器的存储，所有相同卡片共享，卡片删除数据不删除 */
 declare module "storage" {
-    export interface Store {}
+    export interface Store {
+        get(name: string): number | string | boolean | File;
+        set(name: string, value: number | string | boolean | File): void;
+        del(name: string): void;
+        on(name: strong, cb: (data: { type: "change"; value: number | string | boolean | File } | { type: "delete" }) => void): void;
+        off(name: string, cb: any): void;
+    }
     const store: Store;
     export default store;
 }
 /**会同步至服务器的私有存储，如果界面上的卡片删除，则数据也删除 */
 declare module "private-storage" {
-    export interface Store {}
+    export interface Store {
+        get(name: string): number | string | boolean | File;
+        set(name: string, value: number | string | boolean | File): void;
+        del(name: string): void;
+        on(name: strong, cb: (data: { type: "change"; value: number | string | boolean | File } | { type: "delete" }) => void): void;
+        off(name: string, cb: any): void;
+    }
     const store: Store;
     export default store;
 }
 /**离线存储，所有相同卡片共享，卡片删除数据不删除 */
 declare module "local-storage" {
-    export interface Store {}
+    export interface Store {
+        get(name: string): number | string | boolean | File;
+        set(name: string, value: number | string | boolean | File): void;
+        del(name: string): void;
+        on(name: strong, cb: (data: { type: "change"; value: number | string | boolean | File } | { type: "delete" }) => void): void;
+        off(name: string, cb: any): void;
+    }
     const store: Store;
     export default store;
 }
 /**离线私有存储，如果界面上的卡片删除，则数据也删除 */
 declare module "private-local-storage" {
-    export interface Store {}
+    export interface Store {
+        get(name: string): number | string | boolean | File;
+        set(name: string, value: number | string | boolean | File): void;
+        del(name: string): void;
+        on(name: strong, cb: (data: { type: "change"; value: number | string | boolean | File } | { type: "delete" }) => void): void;
+        off(name: string, cb: any): void;
+    }
     const store: Store;
     export default store;
 }
 
 declare module "widget" {
+    interface ContextMenuItem {
+        label?: string;
+        disabled?: string;
+        onClick?: () => void;
+        type?: "submenu" | "group";
+        children?: ContextMenuItem[];
+    }
     export function openDialog(
         page: string,
         params?: Record<string, any> | null,
@@ -48,12 +79,14 @@ declare module "widget" {
         }
     );
     export function setTitle(title: string): void;
+    export function setPageTitle(title?: string): void;
     export function exitDialog(): void;
     export function getFavicon(url: string): Promise<Response>;
+    export function setContextMenu(menus: ContextMenuItem[]): void;
 
     export const params: Record<string, any>;
     export const mode: "appstore" | "content";
-    export const bridge: import("./event").Emitter;
+    export const bridge: import("./src/utils/event").Emitter;
 }
 
 // svg icon names

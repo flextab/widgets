@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "股票",
+    "description": "提供实时股票数据",
+    "mainView": "index.vue",
+    "detailView": "view.vue",
+    "feature": "card",
+    "size": {
+        "height": 2,
+        "width": 2
+    },
+    "type": "vue3-sfc"
+}

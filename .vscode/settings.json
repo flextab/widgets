@@ -4,7 +4,7 @@
     "prettier.ignorePath": ".prettierignore",
     "json.schemas": [
         {
-            "url": "/.vscode/schema.json",
+            "url": "/schema.json",
             "fileMatch": ["/**/widget.json", "!/.vscode", "!node_modules"]
         }
     ]
