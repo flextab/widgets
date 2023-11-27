@@ -5,7 +5,8 @@
         <img class="cross-axis" :src="feedbackSvg" v-if="feedbackSvg" />
     </div>
     <el-popover v-model:visible="showPopover" ref="popoverRef" :virtual-ref="popoverVirtualRef" trigger="click"
-        virtual-triggering placement="top-start" :show-arrow="false" :teleported="false" popper-class="stock-pop-box">
+        virtual-triggering placement="top-start" :show-arrow="false" :teleported="false" popper-class="stock-pop-box"
+        v-if="stockInfo.length">
         <ft-space vertical class="stock-info">
             <ft-space v-for="item of stockInfo" justify="space-between">
                 <div>{{ item.label }}</div>
