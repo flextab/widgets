@@ -8,13 +8,13 @@
     {
         "id": "ed841a73-71aa-62ab-d1a8-1f075ce05132",
         "title": "热搜榜",
-        "version": 1,
-        "updateAt": 1701012044246.9084
+        "version": 2,
+        "updateAt": 1701099425477.423
     },
     {
         "id": "08c4242b-5f58-5628-bb8c-ef8ede40e989",
         "title": "股票",
-        "version": 1,
-        "updateAt": 1700994651906.951
+        "version": 2,
+        "updateAt": 1701091380555.2988
     }
 ]

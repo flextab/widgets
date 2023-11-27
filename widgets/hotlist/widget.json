@@ -2,7 +2,7 @@
     "title": "热搜榜",
     "description": "包含百度/微博/知乎等实时热搜榜单。",
     "mainView": "index.vue",
-    "version": 1,
+    "version": 2,
     "manifestVersion": "1",
     "feature": "card",
     "type": "vue3-sfc",

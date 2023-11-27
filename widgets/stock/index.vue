@@ -20,7 +20,7 @@
     </ft-space>
 </template>
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, ref } from "vue"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 import { Stock } from "./libs/stock";
 import { store } from "./libs/store";
 import { openDialog } from 'widget'
@@ -51,7 +51,7 @@ onMounted(() => {
     Storage.on('stock_list', init)
 })
 
-onBeforeMount(() => {
+onBeforeUnmount(() => {
     Storage.off('stock_list', init)
     clearInterval(interval)
 })

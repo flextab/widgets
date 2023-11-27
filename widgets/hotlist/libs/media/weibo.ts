@@ -2,21 +2,18 @@ import { HotBase, HotInfo } from "../base";
 
 export class Weibo extends HotBase {
     constructor() {
-        super("微博", "Weibo", 5 * 60 * 1000);
+        super("微博", "Weibo");
     }
 
-    async get(): Promise<HotInfo[]> {
-        const cachedList = this.getCached();
-        if (cachedList.length) return cachedList;
+    async fetch(): Promise<HotInfo[]> {
         const data = await (await window.corsFetch("https://weibo.com/ajax/side/hotSearch")).json();
         const list = (data?.data.realtime || []).map((data: any) => {
             return {
                 title: data.word,
                 score: +data.raw_hot || 0,
-                link: "https://s.weibo.com/weibo?q=" + data.query,
+                link: "https://s.weibo.com/weibo?q=" + data.word,
             };
         });
-        this.save(list);
         return list;
     }
 }

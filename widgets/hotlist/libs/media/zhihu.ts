@@ -2,12 +2,10 @@ import { HotBase, HotInfo } from "../base";
 
 export class Zhihu extends HotBase {
     constructor() {
-        super("知乎", "Zhihu", 5 * 60 * 1000);
+        super("知乎", "Zhihu");
     }
 
-    async get(): Promise<HotInfo[]> {
-        const cachedList = this.getCached();
-        if (cachedList.length) return cachedList;
+    async fetch(): Promise<HotInfo[]> {
         const data = await (await window.corsFetch("https://www.zhihu.com/api/v4/creators/rank/hot?domain=0&period=hour")).json();
         const list = (data?.data || []).map((data: any) => {
             return {
@@ -16,7 +14,6 @@ export class Zhihu extends HotBase {
                 link: data.question.url,
             };
         });
-        this.save(list);
         return list;
     }
 }

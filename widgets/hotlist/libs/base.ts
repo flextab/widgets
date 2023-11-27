@@ -10,26 +10,33 @@ export class HotBase {
     constructor(
         public title: string,
         /**设置热搜本地缓存key */
-        public key: string,
-        /**开启缓存，设置缓存时间，单位ms */
-        protected duration: number
+        public key: string
     ) {}
 
-    async get(): Promise<HotInfo[]> {
+    async fetch(): Promise<HotInfo[]> {
         return [];
     }
 
-    protected getCached(): HotInfo[] {
+    async get(): Promise<HotInfo[]> {
+        const { list, timestamp } = this.getCached();
+        if (!list.length) {
+            list.push(...(await this.fetch()));
+            this.save(list);
+        } else if (Date.now() - timestamp >= 5 * 60 * 1000) {
+            this.fetch().then((list) => this.save(list));
+        }
+        return list;
+    }
+
+    private getCached(): { list: HotInfo[]; timestamp: number } {
         if (Storage.get(this.key)) {
             const { list, timestamp } = JSON.parse(Storage.get(this.key) as string);
-            if (+new Date() - timestamp < this.duration) {
-                return list;
-            }
+            return { list, timestamp };
         }
-        return [];
+        return { list: [], timestamp: 0 };
     }
 
-    protected save(list: HotInfo[]) {
+    private save(list: HotInfo[]) {
         Storage.set(
             this.key,
             JSON.stringify({
