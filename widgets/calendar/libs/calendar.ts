@@ -74,13 +74,13 @@ export class Calendar {
 
     generateDays() {
         const currentDay = dayjs(new Date(this.year!, this.month! - 1, this.date));
-        const start = currentDay.clone().startOf("month").startOf("week");
+        let start = currentDay.clone().startOf("month").startOf("week");
         const end = currentDay.clone().endOf("month").endOf("week");
         this.days.length = 0;
         const days = end.clone().diff(start, "day");
         for (let i = 0; i < days; i++) {
             this.days.push(this.formatDate(start.toDate()));
-            start.add(1, "day");
+            start = start.add(1, "day");
         }
     }
 
@@ -121,16 +121,21 @@ export class Calendar {
 
     getNextHoliday() {
         const holiday = LunarUtils.HolidayUtil.getHoliday(this.year!, this.month, this.date);
-        const holidays = [...LunarUtils.HolidayUtil.getHolidays(this.year!), ...LunarUtils.HolidayUtil.getHolidays(this.year! + 1)].filter((h) => {
-            if (holiday) {
-                if (h.getTarget() === holiday.getTarget()) {
-                    return false;
+        const holidays = [...LunarUtils.HolidayUtil.getHolidays(this.year!), ...LunarUtils.HolidayUtil.getHolidays(this.year! + 1)].filter(
+            (h) => {
+                if (holiday) {
+                    if (h.getTarget() === holiday.getTarget()) {
+                        return false;
+                    }
                 }
+                return dayjs(h.getDay()).isAfter(dayjs(new Date(this.year!, this.month! - 1, this.date)));
             }
-            return dayjs(h.getDay()).isAfter(dayjs(new Date(this.year!, this.month! - 1, this.date)));
-        });
+        );
         return holidays.length
-            ? `距离${holidays[0].getName()}还有${dayjs(holidays[0].getDay()).diff(dayjs(new Date(this.year!, this.month! - 1, this.date)), "day")}天`
+            ? `距离${holidays[0].getName()}还有${dayjs(holidays[0].getDay()).diff(
+                  dayjs(new Date(this.year!, this.month! - 1, this.date)),
+                  "day"
+              )}天`
             : "";
     }
 
