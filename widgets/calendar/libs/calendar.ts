@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import type LunarUtilsType from "./lunar.js";
+import type LunarUtilsType from "lunar";
 // @ts-ignore
-import * as _LunarUtils from "./lunar.js";
+import * as _LunarUtils from "lunar";
 
 const LunarUtils: typeof LunarUtilsType = _LunarUtils as any;
 const YearSymbolList = Array.from("🐁🐂🐅🐇🐉🐍🐎🐐🐒🐓🐕🐖");

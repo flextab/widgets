@@ -893,10 +893,7 @@ declare class LunarUtil {
     static getXunIndex(ganZhi: string): number;
     static getXun(ganZhi: string): string;
     static getXunKong(ganZhi: string): string;
-    static find(
-        s: string,
-        arr: Array<string>
-    ): {
+    static find(s: string, arr: Array<string>): {
         index: number;
         value: string;
     } | null;
@@ -1098,12 +1095,9 @@ declare class I18n {
     private static updateNumberDictionary;
     private static updateArrayDictionary;
     private static update;
-    static setMessages(
-        lang: string,
-        messages: {
-            [key: string]: string;
-        }
-    ): void;
+    static setMessages(lang: string, messages: {
+        [key: string]: string;
+    }): void;
     static getMessage(key: string): string;
     static setLanguage(lang: string): void;
     static getLanguage(): string;
@@ -1114,36 +1108,4 @@ declare class I18n {
     static init(): void;
 }
 
-export {
-    DaYun,
-    EightChar,
-    Foto,
-    FotoUtil,
-    Fu,
-    Holiday,
-    HolidayUtil,
-    I18n,
-    JieQi,
-    LiuNian,
-    LiuYue,
-    Lunar,
-    LunarMonth,
-    LunarTime,
-    LunarUtil,
-    LunarYear,
-    NineStar,
-    NineStarUtil,
-    ShouXingUtil,
-    ShuJiu,
-    Solar,
-    SolarHalfYear,
-    SolarMonth,
-    SolarSeason,
-    SolarUtil,
-    SolarWeek,
-    SolarYear,
-    Tao,
-    TaoUtil,
-    XiaoYun,
-    Yun,
-};
+export { DaYun, EightChar, Foto, FotoUtil, Fu, Holiday, HolidayUtil, I18n, JieQi, LiuNian, LiuYue, Lunar, LunarMonth, LunarTime, LunarUtil, LunarYear, NineStar, NineStarUtil, ShouXingUtil, ShuJiu, Solar, SolarHalfYear, SolarMonth, SolarSeason, SolarUtil, SolarWeek, SolarYear, Tao, TaoUtil, XiaoYun, Yun };
