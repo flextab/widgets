@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "下班倒计时",
+    "description": "提醒下班时间",
+    "mainView": "index.vue",
+    "editView": "edit.vue",
+    "feature": "card",
+    "size": {
+        "height": 1,
+        "width": 2
+    },
+    "type": "vue3-sfc"
+}

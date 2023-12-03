@@ -78,7 +78,9 @@ declare module "widget" {
             title?: string;
         }
     );
+    /**设置组件标题 */
     export function setTitle(title: string): void;
+    /**设置弹框页面的标题 */
     export function setPageTitle(title?: string): void;
     export function exitDialog(): void;
     export function getFavicon(url: string): Promise<Response>;
