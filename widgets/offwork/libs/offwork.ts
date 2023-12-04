@@ -98,7 +98,7 @@ export class OffWorkStatus {
     }
 
     get workImage(): File | string {
-        return this.workImage || Images["tired.png"];
+        return this._workImage || Images["tired.png"];
     }
 
     get offImage(): File | string {
