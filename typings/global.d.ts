@@ -115,11 +115,17 @@ declare type SVGIcons =
     | "warning-fill"
     | "warning";
 
+interface CorsFetch {
+    setRequestHeaders(data: Record<string, string>): CorsFetch;
+    setResponseHeaders(data: Record<string, string>): CorsFetch;
+    fetch(url: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+}
 interface Window {
     corsFetch: {
         (url: RequestInfo | URL, init?: RequestInit): Promise<Response>;
-        XCORS_REQUEST_HEADERS: string;
-        withCustomHeaders: (data: Record<string, string> | Headers) => (url: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+        withCustomHeaders: (data: Record<string, string>) => (url: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+        setRequestHeaders(data: Record<string, string>): CorsFetch;
+        setResponseHeaders(data: Record<string, string>): CorsFetch;
     };
     Serializer: {
         stringify: (data: any) => string;
