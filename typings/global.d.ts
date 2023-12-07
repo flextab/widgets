@@ -85,6 +85,8 @@ declare module "widget" {
     export function exitDialog(): void;
     export function getFavicon(url: string): Promise<Response>;
     export function setContextMenu(menus: ContextMenuItem[]): void;
+    /**设置弹框是否支持全屏化，默认为true */
+    export function enableFullscreen(enable?: boolean): void;
 
     export const params: Record<string, any>;
     export const mode: "appstore" | "content";
