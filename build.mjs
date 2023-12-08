@@ -31,13 +31,22 @@ function generateUUID(widget) {
     const hash = crypto.createHash("sha256");
     hash.update(widget);
     const hashHex = hash.digest("hex");
-    const uuid = `${hashHex.substr(0, 8)}-${hashHex.substr(8, 4)}-${hashHex.substr(12, 4)}-${hashHex.substr(16, 4)}-${hashHex.substr(20, 12)}`;
+    const uuid = `${hashHex.substr(0, 8)}-${hashHex.substr(8, 4)}-${hashHex.substr(12, 4)}-${hashHex.substr(16, 4)}-${hashHex.substr(
+        20,
+        12
+    )}`;
     return uuid;
 }
 
 function getModifyDate(name) {
-    const date = exec(`git log -1 --date=iso --format="%ad" -- widgets/${name}`);
-    return +new Date(date);
+    const files = exec(`git ls-files widgets/${name}`).split("\n");
+    const i = files.indexOf(`widgets/${name}/widget.json`);
+    if (i != -1) {
+        files.splice(i, 1);
+    }
+    return files.reduce((date, file) => {
+        return Math.max(date, +new Date(exec(`git log -1 --date=iso --format="%ad" -- ${file}`)));
+    }, 0);
 }
 
 async function zipWidget(name) {
