@@ -73,7 +73,7 @@ function onCustomEdit(e: InputEvent) {
 }
 
 function setActive(key: string) {
-    if ('1234567890+-*/^()e%×÷'.includes(key)) {
+    if ('1234567890+-*/^()e%×÷.'.includes(key)) {
         const visualKey = {
             '*': "×",
             '/': "÷",
@@ -109,7 +109,7 @@ function installMathjs() {
 
 function listenKeyboard(e: KeyboardEvent) {
     if (customEdit.value) return
-    if ('1234567890+-*/^()e%'.includes(e.key)) {
+    if ('1234567890+-*/^()e%.'.includes(e.key)) {
         const visualKey = {
             '*': "×",
             '/': "÷",

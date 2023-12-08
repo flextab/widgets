@@ -65,21 +65,23 @@ export class Calculator {
     evaluate() {
         try {
             const parser = this.getParser();
-            let result = parser
-                .evaluate(
-                    this.input.replace(/([×π÷])/g, (str, match) => {
-                        return (
-                            (
-                                {
-                                    "×": "*",
-                                    "÷": "/",
-                                    π: "pi",
-                                } as any
-                            )[match] || ""
-                        );
-                    })
-                )
-                .toString();
+            let result = parseFloat(
+                Number(
+                    parser.evaluate(
+                        this.input.replace(/([×π÷])/g, (str, match) => {
+                            return (
+                                (
+                                    {
+                                        "×": "*",
+                                        "÷": "/",
+                                        π: "pi",
+                                    } as any
+                                )[match] || ""
+                            );
+                        })
+                    )
+                ).toFixed(10)
+            ).toString();
             if (result === "Infinity") {
                 result = "∞";
             } else if (result === "-Infinity") {
