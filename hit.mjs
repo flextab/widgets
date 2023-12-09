@@ -1,4 +1,3 @@
-// 在nodejs中，不使用第三方库请求 https://hits.sh/widget.flextab.art/id.preview
 import https from "https";
 import fs from "fs";
 import path from "path";
