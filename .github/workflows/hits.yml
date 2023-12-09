@@ -1,0 +1,32 @@
+name: Get Widget Usage Stats
+
+on:
+    schedule:
+        - cron: "0 1 * * *"
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  ssh-key: ${{ secrets.MY_TOKEN }}
+
+            - name: Set up Node.js 18.x
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 18
+
+            - name: Run npm run hits
+              run: npm run hits
+
+            - name: Commit and push changes
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add .
+                  git commit -m "Update widget usage stats"
+                  git push origin master
