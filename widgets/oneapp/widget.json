@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "ONE",
+    "description": "韩寒·一个，每天只为你准备一张图片/一篇文字/一个问答",
+    "mainView": "index.vue",
+    "feature": "card",
+    "inspirationView": "text.vue",
+    "size": {
+        "height": 1,
+        "width": 1
+    },
+    "type": "vue3-sfc"
+}

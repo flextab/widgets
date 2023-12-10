@@ -48,6 +48,10 @@
             "type": "string",
             "description": "插件编辑页面入口"
         },
+        "inspirationView": {
+            "type": "string",
+            "description": "插件灵感入口，位于页面最下方，用于展示每日一言信息，但是用户可能会主动关闭此页面。"
+        },
         "size": {
             "type": "object",
             "description": "插件占据网格尺寸",
