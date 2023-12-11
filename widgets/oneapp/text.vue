@@ -23,7 +23,6 @@ init()
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    width: 800px;
     max-width: 80vw;
     margin: 0 auto;
     cursor: pointer;
