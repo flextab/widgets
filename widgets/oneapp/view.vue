@@ -126,6 +126,16 @@ init()
                         margin: 0 auto;
                     }
                 }
+
+                :deep(p) {
+                    line-height: 2;
+                }
+
+                :deep(p:not([style])) {
+                    &::first-letter {
+                        margin-left: 2em;
+                    }
+                }
             }
         }
     }

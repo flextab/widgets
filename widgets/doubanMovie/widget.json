@@ -1,0 +1,14 @@
+{
+    "title": "豆瓣电影日历",
+    "description": "豆瓣电影日历，每天一部经典电影。",
+    "mainView": "index.vue",
+    "inspirationView": "text.vue",
+    "version": 1,
+    "manifestVersion": "1",
+    "feature": "card",
+    "type": "vue3-sfc",
+    "size": {
+        "height": 2,
+        "width": 4
+    }
+}
