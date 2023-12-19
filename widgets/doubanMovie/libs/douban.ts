@@ -56,9 +56,7 @@ export async function getToday(): Promise<DoubanData | undefined> {
     }
     if (!list.length) {
         const _listData = await (
-            await window.corsFetch(
-                `https://registry.npmmirror.com/@ikrong/douban-movie-calendar/latest/files/${new Date().getFullYear()}.json`
-            )
+            await window.corsFetch(`https://registry.npmmirror.com/@ikrong/douban-movie-calendar/latest/files/${new Date().getFullYear()}.json`)
         ).json();
         list.push(..._listData);
         Storage.set("list", JSON.stringify({ year: new Date().getFullYear(), list }));
@@ -66,13 +64,6 @@ export async function getToday(): Promise<DoubanData | undefined> {
     const data = list.find((item) => item.date === todayDate) || JSON.parse(JSON.stringify(defaultMovieData));
     Storage.set("today", JSON.stringify({ todayDate, data }));
     let image: File | undefined;
-    // if (data?.image) {
-    //     try {
-    //         image = await download(data.image.replace("s_ratio_poster", "l"));
-    //     } catch (error) {
-    //         image = await download(data.image);
-    //     }
-    // }
     let description: string | undefined;
     if (data?.link) {
         description = await getDescription(data.link);
@@ -106,10 +97,15 @@ export async function getDescription(url: string) {
         await window.corsFetch.withCustomHeaders({
             "User-Agent":
                 "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-User": "?1",
+            "Sec-Fetch-Dest": "document",
+            "Upgrade-Insecure-Requests": "1",
         })(`https://m.douban.com/movie/subject/${id}/`)
     ).text();
     const doc = new DOMParser().parseFromString(html, "text/html");
-    const description = doc.querySelector(".page .card .subject-intro .bd>p")?.getAttribute("data-content")?.trim() as string;
+    const description = doc.querySelector(".page .card .subject-intro .bd>p")?.textContent?.trim() as string;
     Storage.set("description", description);
     return description;
 }
