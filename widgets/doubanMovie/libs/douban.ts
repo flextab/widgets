@@ -66,13 +66,13 @@ export async function getToday(): Promise<DoubanData | undefined> {
     const data = list.find((item) => item.date === todayDate) || JSON.parse(JSON.stringify(defaultMovieData));
     Storage.set("today", JSON.stringify({ todayDate, data }));
     let image: File | undefined;
-    if (data?.image) {
-        try {
-            image = await download(data.image.replace("s_ratio_poster", "l"));
-        } catch (error) {
-            image = await download(data.image);
-        }
-    }
+    // if (data?.image) {
+    //     try {
+    //         image = await download(data.image.replace("s_ratio_poster", "l"));
+    //     } catch (error) {
+    //         image = await download(data.image);
+    //     }
+    // }
     let description: string | undefined;
     if (data?.link) {
         description = await getDescription(data.link);
@@ -102,7 +102,12 @@ export async function getDescription(url: string) {
     if (cache) {
         return cache;
     }
-    const html = await (await window.corsFetch(`https://m.douban.com/movie/subject/${id}/`)).text();
+    const html = await (
+        await window.corsFetch.withCustomHeaders({
+            "User-Agent":
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
+        })(`https://m.douban.com/movie/subject/${id}/`)
+    ).text();
     const doc = new DOMParser().parseFromString(html, "text/html");
     const description = doc.querySelector(".page .card .subject-intro .bd>p")?.getAttribute("data-content")?.trim() as string;
     Storage.set("description", description);

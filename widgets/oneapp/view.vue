@@ -15,7 +15,6 @@
             <el-divider>问答</el-divider>
             <div class="one-question">
                 <h4>{{ oneData.question.title }}</h4>
-                <div>{{ oneData.question.subtitle }}</div>
                 <div class="one-content" v-html="oneData.question.content"></div>
             </div>
         </div>
@@ -132,6 +131,7 @@ init()
                 }
 
                 :deep(p:not([style])) {
+
                     &::first-letter {
                         margin-left: 2em;
                     }

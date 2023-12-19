@@ -1,14 +1,14 @@
 <template>
     <div class="douban-movie-page no-scrollbar" tabindex="0">
         <div v-if="!movie" class="cover">
-            <img :src="coverImage">
+            <img :src="coverImage" referrerpolicy="no-referrer" @load="checkImgDownload">
             <div class="tip">请稍后...</div>
         </div>
         <div class="today" v-if="movie">
             <img :src="img" />
             <div class="brief" tabindex="0">
                 <ft-space class="img" vertical align="center" :gap="40">
-                    <img :src="img" />
+                    <img :src="img" referrerpolicy="no-referrer" />
                     <ft-space :gap="4" class="detail-btn" @click="openDouban" title="打开豆瓣详情">
                         <span>豆瓣详情</span>
                         <ft-icon name="Right"></ft-icon>
@@ -74,7 +74,7 @@
 </template>
 <script lang="ts" setup>
 import { onBeforeUnmount, ref, computed } from "vue"
-import { DoubanData, getNearMovie, getToday } from './libs/douban'
+import { DoubanData, download, getNearMovie, getToday } from './libs/douban'
 import dayjs from 'dayjs'
 import coverImage from './cover.jpg'
 
@@ -93,6 +93,15 @@ async function init() {
     movie.value = await getToday()
     if (movie.value?.imageFile) {
         img.value = URL.createObjectURL(movie.value?.imageFile)
+    } else {
+        img.value = movie.value!.image!.replace("s_ratio_poster", "l")
+    }
+}
+
+function checkImgDownload() {
+    const src = movie.value!.image!.replace("s_ratio_poster", "l")
+    if (src) {
+        download(src)
     }
 }
 
