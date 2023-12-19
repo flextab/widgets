@@ -40,5 +40,11 @@
         "title": "豆瓣电影日历",
         "version": 2,
         "updateAt": 1702971217000
+    },
+    {
+        "id": "edb46562-4291-e405-3c6c-5ea4b7eb320d",
+        "title": "备忘录",
+        "version": 1,
+        "updateAt": 1702996648000
     }
 ]
