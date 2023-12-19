@@ -1,0 +1,99 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #00000026;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #0000004d;
+}
+
+::-webkit-scrollbar-thumb:active,
+::-webkit-scrollbar-thumb:horizontal:active {
+    background-color: #0006;
+}
+
+.rich-content {
+    padding: 10px;
+    min-height: 100%;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    &:focus {
+        outline: none;
+        &:active {
+            outline: none;
+        }
+    }
+    p {
+        margin: 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 20px;
+    }
+
+    ul.todo-list {
+        padding-left: 20px;
+        > li {
+            &::marker {
+                content: "";
+            }
+            label.todo-list-checkbox {
+                width: 1em;
+                height: 1em;
+                box-sizing: border-box;
+                border: 1px solid #f2c200;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                margin-left: -20px;
+                margin-top: 1px;
+                position: absolute;
+                &:has(input.todo-checkbox:checked) {
+                    &::before {
+                        content: "✓";
+                        color: #f2c200;
+                    }
+                }
+            }
+        }
+    }
+
+    &.empty {
+        &::before {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #b1b1b1;
+            font-style: italic;
+            pointer-events: none;
+            content: "在这里记录你的一切";
+        }
+        &:focus {
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

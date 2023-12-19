@@ -1,0 +1,29 @@
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        !(async () => {
+            const css = await (await fetch('./style.css')).text()
+            const bg = css.split('\n').filter(line => line.match('background')).filter(line => line.match('url')).map(line => {
+                const url = line.match(/url\((.*)\)/)[1]
+                return url
+            }).map(url => {
+                const img = document.createElement('img')
+                img.title = url
+                img.src = url.replace(/^"|"$/, '')
+                img.width = 100;
+                img.height = 100
+                img.style.objectFit = 'contain'
+                document.body.appendChild(img)
+            })
+        })()
+    </script>
+</body>
+
+</html>

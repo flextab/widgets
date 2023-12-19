@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "备忘录",
+    "description": "记录所有事情",
+    "mainView": "index.vue",
+    "feature": "card",
+    "size": {
+        "height": 1,
+        "width": 1
+    },
+    "type": "vue3-sfc"
+}
