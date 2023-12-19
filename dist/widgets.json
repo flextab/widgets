@@ -32,13 +32,13 @@
     {
         "id": "8b6a966e-8b35-257f-db0e-4f39815962d3",
         "title": "ONE",
-        "version": 3,
-        "updateAt": 1702393164000
+        "version": 4,
+        "updateAt": 1702971217000
     },
     {
         "id": "ca0108bc-c412-7217-d5a0-524ea3f83643",
         "title": "豆瓣电影日历",
-        "version": 1,
-        "updateAt": 1702393164000
+        "version": 2,
+        "updateAt": 1702971217000
     }
 ]
