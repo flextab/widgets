@@ -4,7 +4,7 @@
     "mainView": "index.vue",
     "detailView": "detail.vue",
     "feature": "card",
-    "version": 2,
+    "version": 3,
     "manifestVersion": "1",
     "type": "vue3-sfc",
     "size": {
