@@ -16,6 +16,7 @@ import { } from 'vue'
     display: grid;
     grid-template: repeat(2, 1fr) / repeat(2, 1fr);
     position: relative;
+    cursor: pointer;
 
     >div {
         display: flex;

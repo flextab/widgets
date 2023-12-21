@@ -1,5 +1,7 @@
 <template>
-    <ft-space class="offwork-widget" justify="space-between" v-if="status">
+    <ft-space class="offwork-widget" justify="space-between" v-if="status" @click="openDialog('/edit.vue', null, {
+        title: '编辑',
+    })">
         <ft-image class="img" :src="status.status.working ? status.workImage : status.offImage"></ft-image>
         <ft-space vertical class="tip-container" align="flex-end" justify="space-between">
             <span class="title" v-if="status.status.working">距离下班还有</span>
@@ -12,7 +14,7 @@
 import { onBeforeUnmount, ref } from 'vue'
 import { OffWorkStatus, OffWorkType } from './libs/offwork';
 import Storage from 'private-storage'
-import { setTitle } from 'widget'
+import { setTitle, openDialog } from 'widget'
 
 const status = ref<OffWorkStatus>()
 
@@ -44,6 +46,7 @@ onBeforeUnmount(() => {
     height: 100%;
     background-color: #fff;
     padding: 0 20px;
+    cursor: pointer;
 
     .img {
         height: 100%;
