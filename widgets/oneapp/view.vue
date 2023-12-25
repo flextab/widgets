@@ -84,9 +84,9 @@ init()
             margin: auto;
             width: 100%;
             height: 100%;
-            font-size: 14px;
+            font-size: 18px;
             color: #fff;
-            text-shadow: 0 0 2px #000;
+            text-shadow: 0 0 2px #000, -2px 1px 2px #000;
             display: flex;
             align-items: center;
             justify-content: center;
