@@ -16,7 +16,7 @@ function getHit(id) {
                 data += chunk;
             });
             res.on("end", () => {
-                r(data.match(/hits: (\d+)/)[1]);
+                r(parseInt(data.replace(/,/g, "").match(/hits: (\d+)/)[1]) || 0);
             });
         });
         req.on("error", () => {

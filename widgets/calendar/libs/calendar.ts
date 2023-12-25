@@ -78,7 +78,7 @@ export class Calendar {
         const end = currentDay.clone().endOf("month").endOf("week");
         this.days.length = 0;
         const days = end.clone().diff(start, "day");
-        for (let i = 0; i < days; i++) {
+        for (let i = 0; i <= days; i++) {
             this.days.push(this.formatDate(start.toDate()));
             start = start.add(1, "day");
         }
