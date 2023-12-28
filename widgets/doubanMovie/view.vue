@@ -285,6 +285,8 @@ onBeforeUnmount(() => {
             }
 
             >.date {
+                flex: 0 0 80px;
+
                 >.day {
                     font-size: 50px;
                     border-bottom: 1px solid #d2d2d2;
