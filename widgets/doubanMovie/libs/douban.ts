@@ -37,7 +37,6 @@ export async function getToday(): Promise<DoubanData | undefined> {
         if (todayDate === _today) {
             return {
                 ...data,
-                imageFile: Storage.get("pic") as File,
                 description: Storage.get("description") as string,
             };
         } else {
@@ -73,18 +72,6 @@ export async function getToday(): Promise<DoubanData | undefined> {
         imageFile: image,
         description,
     };
-}
-
-export async function download(url: string) {
-    const cache = Storage.get("pic") as File;
-    if (cache) {
-        return cache;
-    }
-    const data = await (await window.corsFetch(url)).blob();
-    const ext = url.split(".").pop();
-    const file = new File([data], `pic.${ext}`, { type: `image/${ext}` });
-    Storage.set("pic", file);
-    return file;
 }
 
 export async function getDescription(url: string) {

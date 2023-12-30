@@ -1,7 +1,7 @@
 <template>
     <div class="douban-movie-page no-scrollbar" tabindex="0">
         <div v-if="!movie" class="cover">
-            <img :src="coverImage" referrerpolicy="no-referrer" @load="checkImgDownload">
+            <img :src="coverImage" referrerpolicy="no-referrer">
             <div class="tip">请稍后...</div>
         </div>
         <div class="today" v-if="movie">
@@ -74,7 +74,7 @@
 </template>
 <script lang="ts" setup>
 import { onBeforeUnmount, ref, computed } from "vue"
-import { DoubanData, download, getNearMovie, getToday } from './libs/douban'
+import { DoubanData, getNearMovie, getToday } from './libs/douban'
 import dayjs from 'dayjs'
 import coverImage from './cover.jpg'
 
@@ -95,13 +95,6 @@ async function init() {
         img.value = URL.createObjectURL(movie.value?.imageFile)
     } else {
         img.value = movie.value!.image!.replace("s_ratio_poster", "l")
-    }
-}
-
-function checkImgDownload() {
-    const src = movie.value!.image!.replace("s_ratio_poster", "l")
-    if (src) {
-        download(src)
     }
 }
 
