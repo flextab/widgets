@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "音乐",
+    "description": "目前仅提供我的私人音乐库。",
+    "mainView": "index.vue",
+    "feature": "card",
+    "size": {
+        "height": 1,
+        "width": 1
+    },
+    "type": "vue3-sfc"
+}
