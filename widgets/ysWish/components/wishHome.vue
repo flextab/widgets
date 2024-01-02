@@ -118,13 +118,10 @@
 </template>
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeUnmount, ref } from "vue"
-import CloudBG from './../assets/bg.jpeg'
 import { SoundPlayer } from './../libs/sound'
-import Cursor from './../assets/cursor.png'
 import Tab from './tab.vue'
 import Number from './number.vue'
 import WishButton from './wishButton.vue'
-import InfoBg from '../assets/info-bg.png'
 import Icons from '../assets/icons/*.svg?minimatch'
 import Result from '../components/result.vue'
 import Storage from 'storage'
@@ -137,6 +134,9 @@ interface WishRecordItem {
     label: string
 }
 
+const Cursor = FileStore.getFile('assets/cursor.png')
+const CloudBG = FileStore.getFile('assets/bg.jpeg')
+const InfoBg = FileStore.getFile('assets/info-bg.png')
 const KaedeharaKazuha = FileStore.getFile('assets/kaedehara-kazuha.png')
 const HuTao = FileStore.getFile('assets/hu-tao.png')
 const tabs = ref(['选择困难症', '点名', '今天吃什么'])
@@ -222,7 +222,6 @@ function getRecordList() {
 
 function getWishConfig() {
     const id = stringToHashId(tabs.value[tabIndex.value])
-    console.log(id, tabIndex.value)
     const data = Storage.get(`setting_${id}`) as string
     if (data) {
         wishConfig.value = JSON.parse(data)

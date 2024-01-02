@@ -13,13 +13,14 @@
 </template>
 <script lang="ts" setup>
 import { } from "vue"
-import WishButtonBg from '../assets/wish-button.png'
-import WishButtonIcon from '../assets/wish-bt-icon.png'
 import { SoundPlayer } from '../libs/sound'
+import { FileStore } from "../libs/files";
 
 const props = defineProps<{
     count?: number
 }>()
+const WishButtonBg = FileStore.getFile('assets/wish-button.png')
+const WishButtonIcon = FileStore.getFile('assets/wish-bt-icon.png')
 </script>
 <style lang="scss" scoped>
 .wish-button {

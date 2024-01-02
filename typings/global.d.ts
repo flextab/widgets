@@ -218,6 +218,10 @@ declare module "*.ogg" {
     const data: ArrayBuffer;
     export default data;
 }
+declare module "*.m4a" {
+    const data: ArrayBuffer;
+    export default data;
+}
 declare module "*.mp4" {
     const data: ArrayBuffer;
     export default data;

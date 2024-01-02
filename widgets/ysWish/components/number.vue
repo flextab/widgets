@@ -7,16 +7,16 @@
 </template>
 <script lang="ts" setup>
 import { computed } from "vue"
-import StoneIcon from './../assets/stone.png'
-import WishCount from './../assets/wish-count.png'
 import { SoundPlayer } from '../libs/sound'
+import { FileStore } from '../libs/files'
 
 const props = defineProps<{
     value: number
     type?: 'stone' | 'wish'
     showAdd?: boolean
 }>()
-
+const StoneIcon = FileStore.getFile('assets/stone.png')
+const WishCount = FileStore.getFile('assets/wish-count.png')
 const img = computed(() => {
     return props.type === 'wish' ? WishCount : StoneIcon;
 })

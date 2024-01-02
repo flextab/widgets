@@ -12,7 +12,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from "vue"
+import { ref, onMounted, watch, computed } from "vue"
 import Icons from '../assets/icons/*.svg?minimatch'
 
 const props = defineProps<{
@@ -23,6 +23,9 @@ const emit = defineEmits<{
     (name: 'finished'): void
 }>()
 const icons = ref(['pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'])
+watch(computed(() => props.percent), () => {
+    checkEnd()
+})
 
 function checkEnd() {
     if (props.percent === 100) {

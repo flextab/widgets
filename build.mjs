@@ -19,10 +19,10 @@ function exec(cmd) {
 // 先恢复插件描述文件，保证和远程文件一致
 exec(`git checkout -- dist/`);
 
-// if (exec(`git status --porcelain`) !== "") {
-//     console.error("请先暂存或者提交代码，保证工作区和远程仓库一致");
-//     process.exit(1);
-// }
+if (exec(`git status --porcelain`) !== "") {
+    console.error("请先暂存或者提交代码，保证工作区和远程仓库一致");
+    process.exit(1);
+}
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "widgets");
 const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), "dist");
@@ -31,10 +31,7 @@ function generateUUID(widget) {
     const hash = crypto.createHash("sha256");
     hash.update(widget);
     const hashHex = hash.digest("hex");
-    const uuid = `${hashHex.substr(0, 8)}-${hashHex.substr(8, 4)}-${hashHex.substr(12, 4)}-${hashHex.substr(16, 4)}-${hashHex.substr(
-        20,
-        12
-    )}`;
+    const uuid = `${hashHex.substr(0, 8)}-${hashHex.substr(8, 4)}-${hashHex.substr(12, 4)}-${hashHex.substr(16, 4)}-${hashHex.substr(20, 12)}`;
     return uuid;
 }
 

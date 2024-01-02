@@ -50,7 +50,6 @@ async function download() {
     try {
         await FileStore.download(progress => {
             loadingProgress.value = progress
-            console.log(progress)
         })
         createFont()
     } catch (error) {

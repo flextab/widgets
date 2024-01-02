@@ -21,9 +21,9 @@
 <script lang="ts" setup>
 import { ref } from "vue"
 import Wave from './wave.vue'
-import Plate from '../assets/plate.png'
 import GiftSvg from '../assets/icons/gift.svg'
 import { SoundPlayer } from "../libs/sound"
+import { FileStore } from "../libs/files"
 
 const props = defineProps<{
     content: string
@@ -31,6 +31,7 @@ const props = defineProps<{
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
+const Plate = FileStore.getFile('assets/plate.png')
 const gift = ref(decodeURIComponent(GiftSvg.split(',')[1]))
 
 function calcFontSize() {

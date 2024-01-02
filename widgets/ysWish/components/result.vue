@@ -14,11 +14,10 @@
 </template>
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, ref } from "vue"
-import Video from './../assets/video.mp4'
 import { SoundPlayer } from '../libs/sound'
 import SingleResult from './singleResult.vue'
 import AllResult from './allResult.vue'
-import BG from './../assets/result-bg.png'
+import { FileStore } from "../libs/files"
 
 const props = defineProps<{
     items: string | string[]
@@ -26,7 +25,8 @@ const props = defineProps<{
 const emit = defineEmits<{
     (name: 'close'): void
 }>()
-const videoSrc = ref(URL.createObjectURL(new Blob([Video], { type: 'video/mp4' })))
+const videoSrc = FileStore.getFile('assets/video.mp4')
+const BG = FileStore.getFile('assets/result-bg.png')
 const showContent = ref(false)
 const videoEl = ref<HTMLVideoElement>()
 const resultList = computed(() => {
@@ -62,7 +62,6 @@ function onTimeUpdate(e: any) {
 SoundPlayer.pause()
 
 onBeforeUnmount(() => {
-    URL.revokeObjectURL(videoSrc.value)
 })
 </script>
 <style lang="scss" scoped>

@@ -9,13 +9,14 @@
 </template>
 <script lang="ts" setup>
 import { } from "vue"
-import BookMark from '../assets/bookmark.png'
 import { SoundPlayer } from '../libs/sound'
+import { FileStore } from "../libs/files";
 
 const props = defineProps<{
     items: string[]
 }>()
 
+const BookMark = FileStore.getFile('assets/bookmark.png')
 function playSound(i = 0) {
     setTimeout(() => {
         if (i < Math.min(props.items.length, 10)) {
