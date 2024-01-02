@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "manifestVersion": "1",
+    "title": "许愿",
+    "description": "原神许愿自定义抽卡，帮助你选择。",
+    "mainView": "index.vue",
+    "feature": "card",
+    "size": {
+        "height": 1,
+        "width": 1
+    },
+    "type": "vue3-sfc"
+}

@@ -88,9 +88,21 @@ declare module "widget" {
     /**设置弹框是否支持全屏化，默认为true */
     export function enableFullscreen(enable?: boolean): void;
 
+    /**下载大文件 */
+    export function downloadLargeFile(path: string): Promise<File>;
+    /**清除已下载大文件 */
+    export function clearLargeFiles(): void;
+    /**获取需要下载的大文件列表 */
+    export function getLargeFileList(): string[];
+
     export const params: Record<string, any>;
     export const mode: "appstore" | "content";
     export const bridge: import("./src/utils/event").Emitter;
+
+    /**是否运行在浏览器插件系统中 */
+    export const isInExtension: boolean;
+    /**是否是导入的自定义组件 */
+    export const isCustomWidget: boolean;
 }
 
 // svg icon names
@@ -134,6 +146,10 @@ interface Window {
         async: (data: any) => Promise<string>;
         parse: (value: string) => any;
     };
+}
+
+declare module globalThis {
+    const require: (path: string) => any;
 }
 
 declare module "*?minimatch" {
@@ -180,4 +196,33 @@ declare module "*.ico" {
 declare module "*.webp" {
     const src: string;
     export default src;
+}
+declare module "*.ttf" {
+    const src: string;
+    export default src;
+}
+declare module "*.woff" {
+    const src: string;
+    export default src;
+}
+declare module "*.woff2" {
+    const src: string;
+    export default src;
+}
+
+declare module "*.mp3" {
+    const data: ArrayBuffer;
+    export default data;
+}
+declare module "*.ogg" {
+    const data: ArrayBuffer;
+    export default data;
+}
+declare module "*.mp4" {
+    const data: ArrayBuffer;
+    export default data;
+}
+declare module "*.webm" {
+    const data: ArrayBuffer;
+    export default data;
 }

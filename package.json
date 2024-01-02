@@ -10,7 +10,9 @@
     "author": "",
     "license": "MIT",
     "devDependencies": {
+        "@types/inquirer": "^9.0.7",
         "fast-glob": "^3.3.2",
+        "inquirer": "^9.2.12",
         "jszip": "^3.10.1"
     }
 }
