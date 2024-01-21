@@ -121,21 +121,17 @@ export class Calendar {
 
     getNextHoliday() {
         const holiday = LunarUtils.HolidayUtil.getHoliday(this.year!, this.month, this.date);
-        const holidays = [...LunarUtils.HolidayUtil.getHolidays(this.year!), ...LunarUtils.HolidayUtil.getHolidays(this.year! + 1)].filter(
-            (h) => {
-                if (holiday) {
-                    if (h.getTarget() === holiday.getTarget()) {
-                        return false;
-                    }
+        const holidays = [...LunarUtils.HolidayUtil.getHolidays(this.year!), ...LunarUtils.HolidayUtil.getHolidays(this.year! + 1)].filter((h) => {
+            if (holiday) {
+                if (h.getTarget() === holiday.getTarget()) {
+                    return false;
                 }
-                return dayjs(h.getDay()).isAfter(dayjs(new Date(this.year!, this.month! - 1, this.date)));
             }
-        );
+            if (h.isWork()) return false;
+            return dayjs(h.getDay()).isAfter(dayjs(new Date(this.year!, this.month! - 1, this.date)));
+        });
         return holidays.length
-            ? `距离${holidays[0].getName()}还有${dayjs(holidays[0].getDay()).diff(
-                  dayjs(new Date(this.year!, this.month! - 1, this.date)),
-                  "day"
-              )}天`
+            ? `距离${holidays[0].getName()}还有${dayjs(holidays[0].getDay()).diff(dayjs(new Date(this.year!, this.month! - 1, this.date)), "day")}天`
             : "";
     }
 

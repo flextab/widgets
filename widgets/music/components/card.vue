@@ -1,6 +1,6 @@
 <template>
     <ft-virtual-scroll class="card-view no-scrollbar" :items="list" item-key="id" :getColumnsCount="getColumnsCount"
-        v-if="list.length" ref="scrollView" @scroll="onScroll">
+        v-if="list.length" ref="scrollView">
         <template #="m">
             <div class="music-card" @click="emit('play', m)"
                 :class="{ active: Collection.list[index]?.normal === m.normal }">
@@ -34,7 +34,6 @@ const scrollView = ref()
 const viewSize = ref({
     width: 0,
     column: 1,
-    scrollTop: 0,
 })
 const currentMusicPosition = computed(() => {
     if (props.index === -1) return 0;
@@ -42,10 +41,6 @@ const currentMusicPosition = computed(() => {
     return Math.max((line - 1) * (140 + 12), 0);
 })
 const focusSVG = ref(decodeURIComponent(FocusIcon.split(',')[1]))
-
-function onScroll(e: MouseEvent) {
-    viewSize.value.scrollTop = (e.target as HTMLElement).scrollTop;
-}
 
 function getColumnsCount(width: number) {
     let column = Math.floor(width / 140);
