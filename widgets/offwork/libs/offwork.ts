@@ -64,8 +64,10 @@ export class OffWorkStatus {
 
         if (this.type === OffWorkType.Official) {
             const holiday = lunar.HolidayUtil.getHoliday(dayjs().format("YYYY-MM-DD"));
-            if (holiday && !holiday.isWork()) {
-                working = false;
+            if (holiday) {
+                if (!holiday.isWork()) {
+                    working = false;
+                }
             } else if ([5, 6].includes(dayjs().weekday())) {
                 working = false;
             }
