@@ -25,7 +25,6 @@ export interface DoubanData {
     comment?: string;
     date?: string;
     tip?: string;
-    imageFile?: File;
     description?: string;
 }
 
@@ -55,7 +54,9 @@ export async function getToday(): Promise<DoubanData | undefined> {
     }
     if (!list.length) {
         const _listData = await (
-            await window.corsFetch(`https://registry.npmmirror.com/@ikrong/douban-movie-calendar/latest/files/${new Date().getFullYear()}.json`)
+            await window.corsFetch(
+                `https://registry.npmmirror.com/@ikrong/douban-movie-calendar/latest/files/${new Date().getFullYear()}.json`
+            )
         ).json();
         list.push(..._listData);
         Storage.set("list", JSON.stringify({ year: new Date().getFullYear(), list }));
@@ -72,6 +73,29 @@ export async function getToday(): Promise<DoubanData | undefined> {
         imageFile: image,
         description,
     };
+}
+
+export function saveImageByLink(url: string, img: string) {
+    const listData = Storage.get("list") as string;
+    const list: DoubanData[] = [];
+    if (listData) {
+        const _listData = JSON.parse(listData);
+        list.push(..._listData.list);
+    }
+    const db = list.find((db) => db.link === url);
+    if (db) {
+        db.image = img;
+    }
+    Storage.set("list", JSON.stringify({ year: new Date().getFullYear(), list }));
+
+    const cache = Storage.get("today") as string;
+    if (cache) {
+        const { todayDate: _today, data } = JSON.parse(cache);
+        if (data.link === url) {
+            data.image = img;
+            Storage.set("today", JSON.stringify({ todayDate: _today, data }));
+        }
+    }
 }
 
 export async function getDescription(url: string) {
@@ -95,6 +119,28 @@ export async function getDescription(url: string) {
     const description = doc.querySelector(".page .card .subject-intro .bd>p")?.textContent?.trim() as string;
     Storage.set("description", description);
     return description;
+}
+
+export async function getDetail(url: string) {
+    const id = url.split("/").filter(Boolean).pop();
+    const html = await (
+        await window.corsFetch.withCustomHeaders({
+            "User-Agent":
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-User": "?1",
+            "Sec-Fetch-Dest": "document",
+            "Upgrade-Insecure-Requests": "1",
+        })(`https://m.douban.com/movie/subject/${id}/`)
+    ).text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const description = doc.querySelector(".page .card .subject-intro .bd>p")?.textContent?.trim() as string;
+    const img = doc.querySelector("#subject-header-container > div.sub-info > a > img")!.getAttribute("src") as string;
+    return {
+        image: img,
+        description: description,
+    };
 }
 
 export function getNearMovie(date: string) {
