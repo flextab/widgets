@@ -5,10 +5,10 @@
             <div class="tip">请稍后...</div>
         </div>
         <div class="today" v-if="movie">
-            <img :src="img" />
+            <Image :src="img" :link="movie.link" v-if="img && movie.link" />
             <div class="brief" tabindex="0">
                 <ft-space class="img" vertical align="center" :gap="40">
-                    <img :src="img" referrerpolicy="no-referrer" />
+                    <Image :src="img" :link="movie.link" v-if="img && movie.link" />
                     <ft-space :gap="4" class="detail-btn" @click="openDouban" title="打开豆瓣详情">
                         <span>豆瓣详情</span>
                         <ft-icon name="Right"></ft-icon>
@@ -25,7 +25,7 @@
                             disabled show-score text-color="#ff9900" :score-template="` ${movie?.rating} 分`" />
                     </div>
                     <div class="extra">
-                        <div class="extra-item" v-for=" item  of  movie?.extra ">{{ item }}</div>
+                        <div class="extra-item" v-for="item of movie?.extra">{{ item }}</div>
                     </div>
                     <div class="comment">
                         {{ movie?.comment }}
@@ -49,7 +49,7 @@
                         <span>周{{ dayjs(m.date).format('dd') }}</span>
                     </div>
                 </ft-space>
-                <img :src="m.image" referrerpolicy="no-referrer" />
+                <Image :src="m.image" :link="m.link" v-if="m.image && m.link" />
                 <div class="movie-info">
                     <div class="title">{{ m.title }}</div>
                     <div class="year">{{ m.extra?.[4] }}</div>
@@ -77,6 +77,7 @@ import { onBeforeUnmount, ref, computed } from "vue"
 import { DoubanData, getNearMovie, getToday } from './libs/douban'
 import dayjs from 'dayjs'
 import coverImage from './cover.jpg'
+import Image from './img.vue';
 
 const movie = ref<DoubanData>()
 const img = ref('')
@@ -91,11 +92,7 @@ const moreMovieEl = ref<HTMLDivElement>()
 
 async function init() {
     movie.value = await getToday()
-    if (movie.value?.imageFile) {
-        img.value = URL.createObjectURL(movie.value?.imageFile)
-    } else {
-        img.value = movie.value!.image!.replace("s_ratio_poster", "l")
-    }
+    img.value = movie.value!.image!.replace("s_ratio_poster", "l")
 }
 
 function openDouban() {
@@ -151,7 +148,7 @@ onBeforeUnmount(() => {
         height: 600px;
         position: relative;
 
-        >img {
+        >::v-deep(img) {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -189,7 +186,7 @@ onBeforeUnmount(() => {
         >.img {
             flex: 0 0 200px;
 
-            >img {
+            ::v-deep(img) {
                 width: 200px;
                 height: 300px;
                 object-fit: cover;
@@ -288,7 +285,7 @@ onBeforeUnmount(() => {
                 }
             }
 
-            >img {
+            >::v-deep(img) {
                 flex: 0 0 100px;
                 width: 100px;
                 height: 147px;

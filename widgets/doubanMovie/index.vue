@@ -1,6 +1,6 @@
 <template>
     <div class="douban-movie-calendar" v-if="movie" @click="openDialog('/view.vue')">
-        <img :src="img" referrerpolicy="no-referrer">
+        <Image :src="img" :link="movie.link" v-if="movie.link" />
         <div class="brief">
             <div class="brief-content">
                 <ft-space vertical class="date-info">
@@ -31,6 +31,7 @@ import { DoubanData, getToday } from './libs/douban'
 import dayjs from 'dayjs'
 import { openDialog } from "widget";
 import coverImage from './cover.jpg'
+import Image from './img.vue';
 
 const movie = ref<DoubanData>()
 const img = ref('')
@@ -41,11 +42,7 @@ const date = ref({
 
 async function init() {
     movie.value = await getToday()
-    if (movie.value?.imageFile) {
-        img.value = URL.createObjectURL(movie.value?.imageFile)
-    } else {
-        img.value = movie.value!.image!.replace("s_ratio_poster", "l")
-    }
+    img.value = movie.value!.image!.replace("s_ratio_poster", "l")
 }
 
 init()
@@ -89,7 +86,7 @@ onBeforeUnmount(() => {
     height: 100%;
     cursor: pointer;
 
-    >img {
+    >::v-deep(img) {
         width: 100%;
         height: 100%;
         object-fit: cover;
