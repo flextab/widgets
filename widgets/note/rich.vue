@@ -46,6 +46,13 @@ const buttons = ref([
 ])
 let editor: any
 
+watch(computed(() => props.modelValue), () => {
+    const content = editor.getHTML()
+    if (props.modelValue !== content) {
+        editor.setHTML(props.modelValue || '')
+    }
+})
+
 function getSVG(content: string) {
     return decodeURIComponent(content.split(';,')[1])
 }
@@ -70,7 +77,10 @@ function update() {
         if (editor.getRoot().classList.contains('empty')) {
             editor.getRoot().classList.remove('empty')
         }
-        emit('update:modelValue', editor.getHTML())
+        const content = editor.getHTML()
+        if (props.modelValue !== content) {
+            emit('update:modelValue', editor.getHTML())
+        }
     }
 }
 

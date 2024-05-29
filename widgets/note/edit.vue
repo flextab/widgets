@@ -59,7 +59,7 @@
     </el-container>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue"
+import { onBeforeUnmount, ref } from "vue"
 import RichEditor from './rich.vue'
 import Storage from 'storage'
 import FeatherSVG from './assets/feather.svg'
@@ -88,6 +88,26 @@ function init() {
         })
     }
     editNote(list.value[0])
+}
+
+function reloadForm() {
+    const data = Storage.get('list') as string
+    if (data) {
+        const notes = JSON.parse(data) as NoteData[]
+        notes.map(item => {
+            item.content = Storage.get(item.id) as string || ''
+        })
+        const note = notes.find(n => n.id === form.value.id)
+        list.value = notes;
+        if (note) {
+            if (note.title !== form.value.title) {
+                form.value.title = note.title
+            }
+            if (note.content !== form.value.content) {
+                form.value.content = note.content
+            }
+        }
+    }
 }
 
 function generateUUID() {
@@ -167,6 +187,11 @@ function getDate(date: number) {
 }
 
 init();
+Storage.on('list', reloadForm)
+
+onBeforeUnmount(() => {
+    Storage.off('list', reloadForm)
+})
 </script>
 <style lang="scss">
 :host([fullscreen]) {
